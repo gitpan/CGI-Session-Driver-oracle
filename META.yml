@@ -1,0 +1,18 @@
+--- #YAML:1.0
+name: CGI-Session-Driver-oracle
+version: 1.00
+author:
+  - Ron Savage <ron@savage.net.au>
+abstract: A CGI::Session driver for Oracle
+license: artistic
+requires:
+  CGI::Session::Driver::DBI: 0
+  Carp: 0
+build_requires:
+  Test::More: 0
+  Test::Pod: 0
+provides:
+  CGI::Session::Driver::oracle:
+    file: lib/CGI/Session/Driver/oracle.pm
+    version: 1.00
+generated_by: Module::Build version 0.2611

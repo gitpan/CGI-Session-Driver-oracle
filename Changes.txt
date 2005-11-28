@@ -1,0 +1,4 @@
+Revision history for Perl extension CGI::Session::Driver::oracle.
+
+1.00  Mon 28 Nov 11:00:00 2005
+	- Original version
