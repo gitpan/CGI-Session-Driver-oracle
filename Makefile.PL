@@ -25,7 +25,7 @@ WriteMakefile
 	PREREQ_PM		=>
 	{
 		Carp						=> 0,
-		CGI::Session::Driver::DBI	=> 0,
+		CGI::Session::Driver::DBI	=> '4.21',
 		Test::More					=> 0,
 		Test::Pod					=> 0,
 	},

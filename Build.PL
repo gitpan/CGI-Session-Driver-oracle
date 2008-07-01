@@ -13,6 +13,6 @@ Module::Build -> new
 	requires		=>
 	{
 		Carp						=> 0,
-		CGI::Session::Driver::DBI	=> 0,
+		CGI::Session::Driver::DBI	=> '4.21',
 	},
 ) -> create_build_script();

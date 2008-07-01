@@ -5,7 +5,7 @@ use Carp;
 use CGI::Session::Driver::DBI;
 
 @CGI::Session::Driver::oracle::ISA       = qw( CGI::Session::Driver::DBI );
-$CGI::Session::Driver::oracle::VERSION   = '1.00';
+$CGI::Session::Driver::oracle::VERSION   = '1.01';
 
 # -----------------------------------------------
 
@@ -31,7 +31,7 @@ sub store
 	Carp::croak "store(): usage error" if (! ($sid && $datastr) );
 
 	my($dbh) = $$self{'Handle'};
-	my($sth) = $dbh -> prepare('select id from ' . $self -> table_name() . ' where id=?');
+	my($sth) = $dbh -> prepare("select $self->{IdColName} from " . $self -> table_name() . ' where id=?');
     
 	if (! defined $sth)
 	{
@@ -42,12 +42,12 @@ sub store
 
 	if ($sth->fetchrow_array() )
 	{
-		_run_sql($dbh, 'update ' . $self -> table_name() . ' set a_session=? where id=?', $datastr, $sid)
+		_run_sql($dbh, 'update ' . $self -> table_name() . " set $self->{DataColName}=? where $self->{IdColName}=?" $datastr, $sid)
 			or return $self -> set_error("store(): serialize to db failed " . $dbh->errstr() );
 	}
 	else
 	{
-		_run_sql($dbh, 'insert into ' . $self -> table_name() . ' (a_session, id) values(?, ?)', $datastr, $sid)
+		_run_sql($dbh, 'insert into ' . $self -> table_name() . " ($self->{DataColName}, $self->{IdColName}) values(?, ?)", $datastr, $sid)
 			or return $self -> set_error("store(): serialize to db failed " . $dbh->errstr() );
 	}
 
@@ -113,6 +113,16 @@ C<CGI::Session::Driver::oracle> - A CGI::Session driver for Oracle
 		Password   => 'hello',
 	});
 	$s = CGI::Session -> new('driver:Oracle', $sid, {Handle => $dbh});
+
+or
+
+    $s = new CGI::Session('driver:Oracle', undef,
+    {
+        TableName=>'session',
+        IdColName=>'my_id',
+        DataColName=>'my_data',
+        Handle=>$dbh,
+    });
 
 =head1 Description
 

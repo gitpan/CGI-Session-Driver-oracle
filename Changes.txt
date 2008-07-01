@@ -1,4 +1,8 @@
 Revision history for Perl extension CGI::Session::Driver::oracle.
 
+1.01  Thu 13 Mar 14:02:00 2008
+    - Allow the sessions table's id and a_session columns to be renamed. See POD for details
+    - This module depends on CGI::Session::Driver::DBI V 4.21
+
 1.00  Mon 28 Nov 11:00:00 2005
 	- Original version
