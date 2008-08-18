@@ -1,10 +1,10 @@
 Build.PL
+Changelog.ini
 Changes.txt
 lib/CGI/Session/Driver/oracle.pm
 Makefile.PL
 MANIFEST			This list of files
-MANIFEST.SKIP
-META.yml
 README
 t/pod.t
 t/test.t
+META.yml

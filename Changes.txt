@@ -1,8 +1,12 @@
 Revision history for Perl extension CGI::Session::Driver::oracle.
 
-1.01  Thu 13 Mar 14:02:00 2008
+1.02  Tue Aug 19 08:45:00 2008
+	- Fix typo in method call where a comma was missing between parameters
+
+1.01  Thu Mar 13 14:02:00 2008
     - Allow the sessions table's id and a_session columns to be renamed. See POD for details
     - This module depends on CGI::Session::Driver::DBI V 4.21
+	- Fix faults datestamps in this file, and generate Changelog.ini
 
-1.00  Mon 28 Nov 11:00:00 2005
+1.00  Mon Nov 28 11:00:00 2005
 	- Original version

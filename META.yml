@@ -1,6 +1,6 @@
 ---
 name: CGI-Session-Driver-oracle
-version: 1.01
+version: 1.02
 author:
   - 'Ron Savage <ron@savage.net.au>'
 abstract: A CGI::Session driver for Oracle
@@ -16,7 +16,7 @@ build_requires:
 provides:
   CGI::Session::Driver::oracle:
     file: lib/CGI/Session/Driver/oracle.pm
-    version: 1.01
+    version: 1.02
 generated_by: Module::Build version 0.280801
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

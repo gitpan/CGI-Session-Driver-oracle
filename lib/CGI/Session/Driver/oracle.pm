@@ -5,7 +5,7 @@ use Carp;
 use CGI::Session::Driver::DBI;
 
 @CGI::Session::Driver::oracle::ISA       = qw( CGI::Session::Driver::DBI );
-$CGI::Session::Driver::oracle::VERSION   = '1.01';
+$CGI::Session::Driver::oracle::VERSION   = '1.02';
 
 # -----------------------------------------------
 
@@ -42,7 +42,7 @@ sub store
 
 	if ($sth->fetchrow_array() )
 	{
-		_run_sql($dbh, 'update ' . $self -> table_name() . " set $self->{DataColName}=? where $self->{IdColName}=?" $datastr, $sid)
+		_run_sql($dbh, 'update ' . $self -> table_name() . " set $self->{DataColName}=? where $self->{IdColName}=?", $datastr, $sid)
 			or return $self -> set_error("store(): serialize to db failed " . $dbh->errstr() );
 	}
 	else
