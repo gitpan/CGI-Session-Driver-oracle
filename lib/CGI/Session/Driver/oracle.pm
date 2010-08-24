@@ -5,14 +5,14 @@ use Carp;
 use CGI::Session::Driver::DBI;
 
 @CGI::Session::Driver::oracle::ISA       = qw( CGI::Session::Driver::DBI );
-$CGI::Session::Driver::oracle::VERSION   = '1.02';
+$CGI::Session::Driver::oracle::VERSION   = '1.05';
 
 # -----------------------------------------------
 
 sub init
 {
 	my($self) = @_;
-    
+
 	if ($$self{'DataSource'} && ($$self{'DataSource'} !~ /^dbi:Oracle/) )
 	{
 		$$self{'DataSource'} = "dbi:Oracle:$$self{'DataSource'}";
@@ -27,12 +27,12 @@ sub init
 sub store
 {
 	my($self, $sid, $datastr) = @_;
-	
+
 	Carp::croak "store(): usage error" if (! ($sid && $datastr) );
 
 	my($dbh) = $$self{'Handle'};
 	my($sth) = $dbh -> prepare("select $self->{IdColName} from " . $self -> table_name() . ' where id=?');
-    
+
 	if (! defined $sth)
 	{
 		return $self -> set_error("store(): \$sth->prepare failed with message " . $dbh -> errstr() );
@@ -60,11 +60,11 @@ sub store
 sub _run_sql
 {
 	my($dbh, $sql, $datastr, $sid) = @_;
-	
+
 	eval
 	{
 		my($sth) = $dbh -> prepare($sql) or return 0;
-		
+
 		$sth -> bind_param(1, $datastr) or return 0;
 		$sth -> bind_param(2, $sid) or return 0;
 		$sth -> execute() or return 0;
@@ -81,7 +81,7 @@ sub _run_sql
 sub table_name
 {
 	my($self) = shift;
-	
+
 	if (! defined $$self{'TableName'})
 	{
 		$$self{'TableName'} = $CGI::Session::Oracle::TABLE_NAME;
@@ -141,7 +141,7 @@ In addition, the I<DataSource> argument can optionally leave the leading "dbi:Or
 =head2 Backwards Compatibility
 
 For backwards compatibility, you can also set the table like this before calling C<new()>.
-However, it is not recommended because it can cause conflicts in a persistent environment. 
+However, it is not recommended because it can cause conflicts in a persistent environment.
 
     $CGI::Session::Oracle::TABLE_NAME = 'my_sessions';
 
@@ -173,16 +173,6 @@ ActiveState-style distro (*.ppd). The latter is shipped in a *.zip file.
 See http://savage.net.au/Perl-modules/html/installing-a-module.html for
 help on unpacking and installing each type of distro.
 
-=head1 Required Modules
-
-=over 4
-
-=item Carp
-
-=item CGI::Session::Driver::DBI
-
-=back
-
 =head1 Credits
 
 This code is partially copied from the corresponding MySql driver by Sherzod Ruzmetov and the Postgres driver by Cosimo Streppone.
@@ -195,8 +185,7 @@ Home page: http://savage.net.au/index.html
 
 =head1 Copyright
 
-Australian copyright (c) 2005, Ron Savage. All rights reserved.
-
+Australian copyright (c) 2005, Ron Savage.
 	All Programs of mine are 'OSI Certified Open Source Software';
 	you can redistribute them and/or modify them under the terms of
 	The Artistic License, a copy of which is available at:

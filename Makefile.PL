@@ -7,27 +7,28 @@ WriteMakefile
 (
 	($] ge '5.005') ?
 	(
-		'AUTHOR' => 'Ron Savage (ron@savage.net.au)',
+		'AUTHOR'   => 'Ron Savage (ron@savage.net.au)',
 		'ABSTRACT' => 'A CGI::Session driver for Oracle',
     ) : (),
-	clean			=>
+	clean =>
 	{
-		FILES		=> 'blib/* Makefile MANIFEST CGI-Session-Driver-oracle-*'
+		FILES => 'blib/* Makefile MANIFEST CGI-Session-Driver-oracle-*'
 	},
-	dist			=>
+	dist =>
 	{
-		COMPRESS	=> 'gzip',
-		SUFFIX		=> 'gz'
+		COMPRESS => 'gzip',
+		SUFFIX   => 'gz'
 	},
-	DISTNAME		=> 'CGI-Session-Driver-oracle',
-	NAME			=> 'CGI::Session::Driver::oracle',
-	PL_FILES		=> {},
-	PREREQ_PM		=>
+	DISTNAME  => 'CGI-Session-Driver-oracle',
+	NAME      => 'CGI::Session::Driver::oracle',
+	PL_FILES  => {},
+	PREREQ_PM =>
 	{
-		Carp						=> 0,
-		CGI::Session::Driver::DBI	=> '4.21',
-		Test::More					=> 0,
-		Test::Pod					=> 0,
+		Carp                      => 0,
+		CGI::Session::Driver::DBI => '4.21',
+		DBI                       => 1.609,
+		Test::More                => 0,
+		Test::Pod                 => 0,
 	},
-	VERSION_FROM	=> 'lib/CGI/Session/Driver/oracle.pm',
+	VERSION_FROM => 'lib/CGI/Session/Driver/oracle.pm',
 );
